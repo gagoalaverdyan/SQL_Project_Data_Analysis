@@ -1,3 +1,4 @@
+-- Calculate average annual and hourly salaries grouped by job_schedule_type
 SELECT
     job_schedule_type,
     AVG(salary_year_avg),
@@ -11,6 +12,7 @@ GROUP BY
 ORDER BY
     job_schedule_type;
 
+-- Count job postings by month, converting UTC time to America/New_York timezone
 SELECT
     EXTRACT(MONTH FROM job_posted_date AT TIME ZONE 'UTC' AT TIME ZONE 'America/New_York') as month,
     COUNT(job_id)
@@ -21,6 +23,7 @@ GROUP BY
 ORDER BY
     month;
 
+-- Count job postings by company where health insurance is provided, in the second quarter
 SELECT
     companies.name as company,
     COUNT(jobs.job_id) as jobs_count

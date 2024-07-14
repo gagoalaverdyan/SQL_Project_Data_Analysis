@@ -1,3 +1,5 @@
+-- Using a CTE to count the number of unique job titles per company and selecting the top 10 companies with the highest counts
+-- Select company names and job counts from company_dim, joining with unique_jobs CTE on company_id
 WITH unique_jobs AS (
     SELECT
         company_id,
@@ -18,8 +20,8 @@ FROM
     INNER JOIN unique_jobs
     ON company_dim.company_id = unique_jobs.company_id;
 
-
-
+-- Using a CTE to calculate average salaries by country and categorizing job postings as above or below average
+-- Select job_id, job_title_short, company name, salary category, and month posted, joining with company_dim and country_averages
 WITH country_averages AS (
     SELECT
         job_country as country_name,
@@ -50,8 +52,8 @@ FROM
 ORDER BY
     month_posted DESC;
 
-
-
+-- Using a CTE to count the number of unique skills per company and find the highest salaries per company
+-- Select company_id, company name, unique skills count, and maximum salary, joining with unique_skills and highest_salaries
 WITH unique_skills AS (
     SELECT
         companies.company_id,
@@ -96,8 +98,8 @@ FROM
 ORDER BY
     company_dim.name;
 
-
-
+-- Using a CTE to count the number of job postings requiring specific skills that offer remote work options
+-- Select skill_id, skill name from skills_dim, and jobs_skills count from remote_job_skills CTE
 WITH remote_job_skills AS (
     SELECT
         job_skills.skill_id,

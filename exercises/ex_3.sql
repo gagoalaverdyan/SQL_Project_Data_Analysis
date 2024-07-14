@@ -1,3 +1,4 @@
+-- Count jobs for 'Data Analyst' role based on salary categories
 SELECT
     CASE 
         WHEN salary_year_avg >= 100000 THEN 'High Salary'  
@@ -15,6 +16,7 @@ GROUP BY
 ORDER BY
     jobs_count DESC;
 
+-- Count distinct companies by whether jobs offer remote work options or not
 SELECT
     COUNT(DISTINCT company_id),
     CASE 
@@ -26,6 +28,7 @@ FROM
 GROUP BY
     job_type;
 
+-- Select job_id, salary_year_avg, experience level, and remote option based on job title
 SELECT
     job_id,
     salary_year_avg,

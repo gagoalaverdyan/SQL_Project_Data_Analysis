@@ -1,3 +1,4 @@
+-- Union of job postings with and without salary information, ordering by presence of salary info and job_id
 (
     SELECT
         job_id,
@@ -23,6 +24,7 @@ ORDER BY
     salary_info DESC,
     job_id;
 
+-- Using a CTE to combine job postings from January, February, and March, selecting jobs with yearly salary above $70,000
 WITH first_quarter AS (
     SELECT * FROM january_jobs
     UNION ALL
@@ -50,8 +52,7 @@ WHERE
 ORDER BY
     first_quarter.job_id;
 
-
-
+-- Using a CTE to combine job postings from January, February, and March, counting jobs by skill, year, and month
 WITH first_quarter AS (
     SELECT * FROM january_jobs
     UNION ALL
