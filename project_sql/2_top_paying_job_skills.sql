@@ -1,19 +1,21 @@
-/*  Retrieve the top 10 highest-paying Data Analyst jobs in San Francisco, including details about the job and the company. */
+/* Retrieve the top skills required for Data Analyst jobs
+in San Francisco, CA */
+
 WITH top_paying_jobs AS(
-SELECT
-    job_id,
-    job_title,
-    salary_year_avg,
-    company_dim.name AS company_name
-FROM
-    job_postings_fact
-    LEFT JOIN company_dim ON job_postings_fact.company_id = company_dim.company_id
-WHERE
-    job_title_short = 'Data Analyst'
-AND job_country = 'United States'
-AND job_location LIKE '%San Francisco%'
-AND salary_year_avg IS NOT NULL
-ORDER BY salary_year_avg DESC
+    SELECT
+        job_id,
+        job_title,
+        salary_year_avg,
+        company_dim.name AS company_name
+    FROM
+        job_postings_fact
+        LEFT JOIN company_dim ON job_postings_fact.company_id = company_dim.company_id
+    WHERE
+        job_title_short = 'Data Analyst'
+        AND job_country = 'United States'
+        AND job_location LIKE '%San Francisco%'
+        AND salary_year_avg IS NOT NULL
+    ORDER BY salary_year_avg DESC
 )
 SELECT
     top_paying_jobs.*,
@@ -24,3 +26,18 @@ FROM
     INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
 ORDER BY
     salary_year_avg DESC;
+
+/*
+Top 10 skills required for Data Analyst roles based on the job postings in San Francisco are:
+
+1. SQL - 60 occurrences
+2. Python - 41 occurrences
+3. Tableau - 34 occurrences
+4. R - 31 occurrences
+5. Excel - 21 occurrences
+6. Looker - 13 occurrences
+7. SAS - 10 occurrences
+8. Oracle - 8 occurrences
+9. Power BI - 8 occurrences
+10. Sheets - 8 occurrences
+*/
